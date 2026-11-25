@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Last Zone Cup – PUBG Live Tournament</title>
+<style>
+:root{
+  --bg:#12161a;--surface:#1b2127;--line:#2e373f;--text:#eef1ec;--muted:#9aa5a0;
+  --accent:#e8a317;--accent-ink:#1a1405;--gold:#e8a317;--silver:#b9c2c9;--bronze:#c27a45;--danger:#ff7a6b;
+  box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#12161a}}
+:root[data-theme="dark"]{--bg:#12161a}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 "Barlow","Segoe UI",system-ui,sans-serif}
+h1,h2,h3{font-family:"Oswald","Arial Narrow",Impact,sans-serif;letter-spacing:.01em;line-height:1.05;margin:0}
+a{color:inherit}
+.wrap{max-width:960px;margin:0 auto;padding:0 20px}
+header{display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--line)}
+.brand{font-family:"Oswald",Impact,sans-serif;font-size:20px;font-weight:700;text-decoration:none}
+.live{display:inline-flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--danger);animation:p 1.6s infinite}
+@keyframes p{50%{opacity:.25}}
+@media (prefers-reduced-motion:reduce){.dot{animation:none}}
+.hero{padding:44px 0 36px}
+.hero h1{font-size:clamp(40px,11vw,84px);font-weight:700;max-width:12ch}
+.hero p{max-width:46ch;color:var(--muted);font-size:18px;margin:16px 0 24px}
+.btn{display:inline-block;background:var(--accent);color:var(--accent-ink);font:600 17px "Barlow",system-ui,sans-serif;padding:14px 26px;border:0;border-radius:4px;text-decoration:none;cursor:pointer;min-height:48px}
+.btn:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:6px;margin-top:32px}
+.stats div{padding:14px 12px;border-right:1px solid var(--line)}
+.stats div:last-child{border:0}
+.stats b{display:block;font:600 22px "Oswald",sans-serif}
+.stats span{color:var(--muted);font-size:14px}
+section{padding:36px 0;border-top:1px solid var(--line)}
+section h2{font-size:32px;margin-bottom:18px}
+.prizes{display:grid;gap:12px}
+@media(min-width:640px){.prizes{grid-template-columns:repeat(3,1fr)}}
+.prize{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--c);border-radius:4px;padding:18px}
+.prize h3{font-size:16px;color:var(--c);font-weight:500}
+.prize b{display:block;font:700 38px "Oswald",sans-serif;margin-top:6px}
+.p1{--c:var(--gold)}.p2{--c:var(--silver)}.p3{--c:var(--bronze)}
+.sched{width:100%;border-collapse:collapse}
+.sched th,.sched td{text-align:left;padding:12px 10px;border-bottom:1px solid var(--line)}
+.sched th{color:var(--muted);font-weight:500;font-size:14px}
+.scroll{overflow-x:auto}
+ul.rules{padding-left:20px;margin:0;max-width:64ch}
+ul.rules li{margin-bottom:8px}
+form{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px;max-width:520px}
+label{display:block;font-weight:600;margin:0 0 6px}
+input{width:100%;background:var(--bg);color:var(--text);border:1px solid var(--line);border-radius:4px;padding:13px;font:16px "Barlow",system-ui,sans-serif;margin-bottom:16px;min-height:48px}
+.fee{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:14px;margin-bottom:16px}
+.err{color:var(--danger);font-size:14px;margin:-10px 0 14px;min-height:0}
+.ok{background:var(--surface);border:1px solid var(--accent);border-radius:6px;padding:22px;max-width:520px}
+.ok h3{font-size:26px;margin-bottom:8px}
+.hide{display:none}
+.livebox{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:22px;max-width:640px}
+.livebox p{color:var(--muted);margin:8px 0 16px}
+.cd{display:flex;gap:10px;margin:12px 0 4px}
+.cd div{background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:10px 12px;min-width:64px;text-align:center}
+.cd b{display:block;font:600 26px "Oswald",sans-serif}
+.cd span{font-size:12px;color:var(--muted)}
+.board{list-style:none;padding:0;margin:12px 0 0}
+.board li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line)}
+.squads{width:100%;border-collapse:collapse}
+.squads td,.squads th{padding:10px;border-bottom:1px solid var(--line);text-align:left}
+.squads th{color:var(--muted);font-weight:500;font-size:14px}
+.squads td:first-child{width:52px;font:600 18px "Oswald",sans-serif}
+.squads small{display:block;color:var(--muted)}
+.squads tr.me{background:var(--surface);box-shadow:inset 4px 0 0 var(--accent)}
+footer{border-top:1px solid var(--line);padding:24px 0 32px;color:var(--muted);font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="#top">LAST ZONE CUP</a>
+    <span class="live"><span class="dot"></span>Registration open</span>
+  </header>
+
+  <main id="top">
+    <div class="hero">
+      <h1>Seven days. One chicken dinner.</h1>
+      <p>A week-long PUBG live tournament with matches every day, streamed live. Top three squads share the prize pool.</p>
+      <a class="btn" href="#register">Register now</a>
+      <div class="stats">
+        <div><b id="pool">350,000</b><span>Total prize pool</span></div>
+        <div><b>7</b><span>Match days</span></div>
+        <div><b id="fee">8,000</b><span>Entry fee</span></div>
+      </div>
+    </div>
+
+    <section id="prizes">
+      <h2>Prizes</h2>
+      <div class="prizes">
+        <div class="prize p1"><h3>1st place</h3><b data-amt="200000"></b></div>
+        <div class="prize p2"><h3>2nd place</h3><b data-amt="100000"></b></div>
+        <div class="prize p3"><h3>3rd place</h3><b data-amt="50000"></b></div>
+      </div>
+    </section>
+
+    <section id="live">
+      <h2>Live channel</h2>
+      <div class="livebox">
+        <span class="live"><span class="dot"></span>Live updates every match day</span>
+        <p>Follow room announcements, match streams and daily standings on our live channel.</p>
+        <a class="btn" id="liveLink" href="#" target="_blank" rel="noopener">Watch live</a>
+        <h3 style="font-size:22px;margin-top:26px">Final results</h3>
+        <div id="locked">
+          <p style="margin-bottom:0">Winners are revealed live right after the Day 7 match.</p>
+          <div class="cd" id="cd"></div>
+        </div>
+        <ul class="board hide" id="board"></ul>
+      </div>
+    </section>
+
+    <section id="squads">
+      <h2>Last night’s squad standings</h2>
+      <p style="color:var(--muted);font-size:14px;margin:-8px 0 14px">Sample data for layout preview. Replace with real results before launch.</p>
+      <div class="scroll"><table class="squads">
+        <thead><tr><th>Pos</th><th>Squad</th></tr></thead>
+        <tbody id="sq"></tbody>
+      </table></div>
+    </section>
+
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <div class="scroll"><table class="sched">
+        <thead><tr><th>Day</th><th>Match</th><th>Room joining</th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table></div>
+      <p style="color:var(--muted);font-size:14px">Rankings combine placement and kills across all seven days. Highest total wins.</p>
+    </section>
+
+    <section id="rules">
+      <h2>Rules</h2>
+      <ul class="rules">
+        <li>Registration closes when the slots fill. Registered players receive room ID and password before each match.</li>
+        <li>Emulators, hacks and teaming with other squads lead to disqualification.</li>
+        <li>Join the room at 12:45 AM sharp. Late players cannot enter once the match starts.</li>
+        <li>The organizer’s decision on disputes is final.</li>
+      </ul>
+    </section>
+
+    <section id="register">
+      <h2>Register</h2>
+      <form id="f" novalidate>
+        <label for="name">In-game ID</label>
+        <input id="name" inputmode="numeric" placeholder="e.g. 5123456789" required>
+        <label for="phone">Phone number</label>
+        <input id="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="0300 1234567" required>
+        <div class="err" id="e-phone"></div>
+        <label for="insta">Instagram username</label>
+        <input id="insta" placeholder="@username" required>
+        <div class="err" id="e-insta"></div>
+        <div class="fee"><span>Entry deposit</span><b id="fee2"></b></div>
+        <button class="btn" type="submit" style="width:100%">Reserve my slot</button>
+      </form>
+      <div class="ok hide" id="ok">
+        <h3>Slot request received</h3>
+        <p id="okmsg"></p>
+        <p style="color:var(--muted);font-size:14px">Your slot is confirmed once the organizer receives your deposit.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>© 2026 Last Zone Cup. Not affiliated with or endorsed by KRAFTON, Inc. PUBG is a trademark of its owner.</footer>
+</div>
+
+<script>
+// ---- Edit these ----
+var CURRENCY = "PKR";
+var FEE = 8000, PRIZES = [200000, 100000, 50000];
+var START = new Date(2026, 10, 23); // 23 November 2026
+var MATCH_TIME = "12:45 AM";
+var CONTACT = "Your payment details / contact here";
+var LIVE_URL = "https://youtube.com/@yourchannel"; // your live channel link
+var REVEAL = new Date(2026, 10, 29, 2, 30); // final results go live after the Day 7 match
+var WINNERS = ["", "", ""]; // fill in 1st, 2nd, 3rd when announced
+// --------------------
+function money(n){return CURRENCY + " " + n.toLocaleString("en-US")}
+document.querySelectorAll("[data-amt]").forEach(function(e){e.textContent = money(+e.dataset.amt)});
+document.getElementById("pool").textContent = money(PRIZES.reduce(function(a,b){return a+b},0));
+document.getElementById("fee").textContent = money(FEE);
+document.getElementById("fee2").textContent = money(FEE);
+var rows = "";
+for (var i = 0; i < 7; i++) {
+  var d = new Date(START); d.setDate(d.getDate() + i);
+  rows += "<tr><td>Day " + (i+1) + "</td><td>" + d.toLocaleDateString("en-US",{weekday:"short",month:"short",day:"numeric"}) + "</td><td>" + MATCH_TIME + "</td></tr>";
+}
+document.getElementById("rows").innerHTML = rows;
+document.getElementById("f").addEventListener("submit", function(e){
+  e.preventDefault();
+  var name = document.getElementById("name").value.trim();
+  var phone = document.getElementById("phone").value.replace(/[\s-]/g,"");
+  var insta = document.getElementById("insta").value.trim().replace(/^@/,"");
+  var okP = /^\+?\d{10,14}$/.test(phone), okI = /^[A-Za-z0-9._]{1,30}$/.test(insta);
+  document.getElementById("e-phone").textContent = okP ? "" : "Enter a valid phone number, 10 to 14 digits.";
+  document.getElementById("e-insta").textContent = okI ? "" : "Use letters, numbers, dots or underscores only.";
+  if (!name || !okP || !okI) return;
+  // TODO: send {name, phone, insta} to your backend here.
+  document.getElementById("f").classList.add("hide");
+  document.getElementById("okmsg").textContent = "ID " + name + ": pay the " + money(FEE) + " deposit to complete registration. " + CONTACT + ". We will message @" + insta + " on Instagram.";
+  document.getElementById("ok").classList.remove("hide");
+});
+var SQUADS = [
+  {n:"Crimson Tide",l:"Fahad Memon"},{n:"Black Mamba",l:"Moiz Hussain"},{n:"Silent Killers",l:"Kamran Yousuf"},{n:"Thunder Kings",l:"Waqas Chaudhry"},
+  {n:"Team Vengeance",l:"Shayyan Jameel"},
+  {n:"Dark Phoenix",l:"Ahmed Raza"},{n:"Lethal Dose",l:"Taimoor Farooq"},{n:"Viper Strike",l:"Arslan Butt"},{n:"Desert Eagles",l:"Affan Javed"},{n:"Night Reapers",l:"Bilal Ahmed"},{n:"Red Cobras",l:"Junaid Iqbal"},
+  {n:"Savage Squad",l:"Hassan Raza"},{n:"Frost Giants",l:"Abdullah Nadeem"},{n:"Alpha Wolves",l:"Hamza Khan"},{n:"Shadow Clan",l:"Rehan Siddiqui"},{n:"Toxic Legion",l:"Faizan Ali"},
+  {n:"Apex Hunters",l:"Owais Rana"},{n:"Royal Assassins",l:"Saad Qureshi"},{n:"Zero Mercy",l:"Shahzaib Ansari"},{n:"Storm Riders",l:"Zain Malik"},{n:"Ghost Protocol",l:"Talha Mehmood"},
+  {n:"Raging Bulls",l:"Haris Baig"},{n:"Iron Syndicate",l:"Usman Tariq"},{n:"Blood Hounds",l:"Daniyal Sheikh"}
+];
+document.getElementById("sq").innerHTML = SQUADS.map(function(s,i){
+  return "<tr" + (s.l === "Shayyan Jameel" ? " class='me'" : "") + "><td>" + (i+1) + "</td><td>" + s.n + (s.l ? "<small>Squad leader: " + s.l + "</small>" : "") + "</td></tr>";
+}).join("");
+document.getElementById("liveLink").href = LIVE_URL;
+function tick(){
+  var ms = REVEAL - new Date();
+  if (ms <= 0) {
+    document.getElementById("locked").classList.add("hide");
+    var b = document.getElementById("board"), l = ["1st","2nd","3rd"];
+    b.innerHTML = PRIZES.map(function(p,i){return "<li><span>" + l[i] + " · " + (WINNERS[i] || "Announced live") + "</span><b>" + money(p) + "</b></li>"}).join("");
+    b.classList.remove("hide");
+    return;
+  }
+  var d = Math.floor(ms/864e5), h = Math.floor(ms%864e5/36e5), m = Math.floor(ms%36e5/6e4), s = Math.floor(ms%6e4/1e3);
+  document.getElementById("cd").innerHTML = [[d,"days"],[h,"hrs"],[m,"min"],[s,"sec"]].map(function(x){return "<div><b>" + x[0] + "</b><span>" + x[1] + "</span></div>"}).join("");
+  setTimeout(tick, 1000);
+}
+tick();
+</script>
+</body>
+</html>
