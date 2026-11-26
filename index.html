@@ -206,12 +206,30 @@ document.getElementById("f").addEventListener("submit", function(e){
   document.getElementById("ok").classList.remove("hide");
 });
 var SQUADS = [
-  {n:"Crimson Tide",l:"Fahad Memon"},{n:"Black Mamba",l:"Moiz Hussain"},{n:"Silent Killers",l:"Kamran Yousuf"},{n:"Thunder Kings",l:"Waqas Chaudhry"},
+  {n:"Raging Bulls",l:"Haris Baig"},
   {n:"Team Vengeance",l:"Shayyan Jameel"},
-  {n:"Dark Phoenix",l:"Ahmed Raza"},{n:"Lethal Dose",l:"Taimoor Farooq"},{n:"Viper Strike",l:"Arslan Butt"},{n:"Desert Eagles",l:"Affan Javed"},{n:"Night Reapers",l:"Bilal Ahmed"},{n:"Red Cobras",l:"Junaid Iqbal"},
-  {n:"Savage Squad",l:"Hassan Raza"},{n:"Frost Giants",l:"Abdullah Nadeem"},{n:"Alpha Wolves",l:"Hamza Khan"},{n:"Shadow Clan",l:"Rehan Siddiqui"},{n:"Toxic Legion",l:"Faizan Ali"},
-  {n:"Apex Hunters",l:"Owais Rana"},{n:"Royal Assassins",l:"Saad Qureshi"},{n:"Zero Mercy",l:"Shahzaib Ansari"},{n:"Storm Riders",l:"Zain Malik"},{n:"Ghost Protocol",l:"Talha Mehmood"},
-  {n:"Raging Bulls",l:"Haris Baig"},{n:"Iron Syndicate",l:"Usman Tariq"},{n:"Blood Hounds",l:"Daniyal Sheikh"}
+  {n:"Night Reapers",l:"Bilal Ahmed"},
+  {n:"Storm Riders",l:"Zain Malik"},
+  {n:"Blood Hounds",l:"Daniyal Sheikh"},
+  {n:"Alpha Wolves",l:"Hamza Khan"},
+  {n:"Crimson Tide",l:"Fahad Memon"},
+  {n:"Zero Mercy",l:"Shahzaib Ansari"},
+  {n:"Viper Strike",l:"Arslan Butt"},
+  {n:"Frost Giants",l:"Abdullah Nadeem"},
+  {n:"Ghost Protocol",l:"Talha Mehmood"},
+  {n:"Dark Phoenix",l:"Ahmed Raza"},
+  {n:"Silent Killers",l:"Kamran Yousuf"},
+  {n:"Toxic Legion",l:"Faizan Ali"},
+  {n:"Desert Eagles",l:"Affan Javed"},
+  {n:"Iron Syndicate",l:"Usman Tariq"},
+  {n:"Savage Squad",l:"Hassan Raza"},
+  {n:"Thunder Kings",l:"Waqas Chaudhry"},
+  {n:"Red Cobras",l:"Junaid Iqbal"},
+  {n:"Apex Hunters",l:"Owais Rana"},
+  {n:"Black Mamba",l:"Moiz Hussain"},
+  {n:"Royal Assassins",l:"Saad Qureshi"},
+  {n:"Lethal Dose",l:"Taimoor Farooq"},
+  {n:"Shadow Clan",l:"Rehan Siddiqui"}
 ];
 document.getElementById("sq").innerHTML = SQUADS.map(function(s,i){
   return "<tr" + (s.l === "Shayyan Jameel" ? " class='me'" : "") + "><td>" + (i+1) + "</td><td>" + s.n + (s.l ? "<small>Squad leader: " + s.l + "</small>" : "") + "</td></tr>";
